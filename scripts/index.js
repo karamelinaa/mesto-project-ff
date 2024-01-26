@@ -25,6 +25,10 @@ function createCard(linkValue, nameValue) {
   return cardElement;
 }
 
+initialCards.forEach((card) => {
+    createCard(card.link, card.name);
+});
+
 function deleteCard(cardElement) {
   cardElement.remove();
   if (cardPlace.children.length === 0) {
