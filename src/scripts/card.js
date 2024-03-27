@@ -1,5 +1,5 @@
 //Функция создания карточки
-export function createCard(card, deleteCard, likeCard , openImage) {
+export function createCard(card, deleteCard, likeCard, openImage) {
     const cardTemplate = document.querySelector("#card-template");
     const cardElement = cardTemplate.content
         .querySelector(".places__item")
@@ -18,9 +18,9 @@ export function createCard(card, deleteCard, likeCard , openImage) {
             deleteCard(cardElement);
         });   
 
-    cardImage.addEventListener("click", function(evt) {
-        return openImage(evt, card);
-    });   
+    cardImage.addEventListener("click", (evt) => {
+        openImage(evt, card);
+    });
 
     return cardElement;
 }

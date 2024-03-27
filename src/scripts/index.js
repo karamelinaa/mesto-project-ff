@@ -22,6 +22,10 @@ const formPlace = document.forms["new-place"];
 const placeInput = document.querySelector(".popup__input_type_card-name");
 const urlInput = document.querySelector(".popup__input_type_url");
 
+const popupTypeImg = document.querySelector('.popup_type_image');
+const popupImage = document.querySelector('.popup__image');
+const popupPlace = document.querySelector('.popup__caption');
+
 //Функция открытия изображения
 
 function openImage(evt, card) {
@@ -82,7 +86,7 @@ formPlace.addEventListener("submit", function (evt) {
     name: placeInput.value,
   };
 
-  cardPlace.prepend(createCard(card, deleteCard));
+  cardPlace.prepend(createCard(card, deleteCard, likeCard , openImage));
 
   popupNewCard.classList.remove("popup_is-opened");
   formPlace.reset();
@@ -97,7 +101,7 @@ cardPlace.addEventListener("click", function (evt) {
 // Добавление карточeк на страницу
 
 function renderCard(card) {
-  cardPlace.append(createCard(card, deleteCard));
+  cardPlace.append(createCard(card, deleteCard, likeCard , openImage));
 };
 
 //  Вывести карточки на страницу
