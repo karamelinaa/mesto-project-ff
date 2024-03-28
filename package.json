@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "serve": "webpack serve",
     "build": "webpack --mode production",
     "dev": "webpack serve"
   },
@@ -27,6 +28,6 @@
     "postcss-loader": "^8.1.0",
     "webpack": "^5.90.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.2"
   }
 }
