@@ -7,7 +7,7 @@ import {
   getCards,
   editUser,
   postCard,
-  changeAvatarLink,
+  changeAvatarLink
 } from "./api.js";
 
 const content = document.querySelector(".content");
@@ -17,8 +17,6 @@ const popupNewCard = document.querySelector(".popup_type_new-card");
 const popupCardForm = popupNewCard.querySelector(".popup__form");
 const cardButton = document.querySelector(".profile__add-button");
 const buttonCloseList = document.querySelectorAll(".popup__close");
-const placeInput = document.querySelector(".popup__input_type_card-name");
-const urlInput = document.querySelector(".popup__input_type_url");
 
 const popupTypeImg = document.querySelector(".popup_type_image");
 const popupImage = popupTypeImg.querySelector(".popup__image");
@@ -43,11 +41,7 @@ const popupButtonAvatar = popupAvatar.querySelector(".popup__button");
 //кнопка сохранить
 
 function loadingSave(loading, button) {
-  if (loading) {
-    button.textContent = "Сохранение...";
-  } else {
-    button.textContent = "Сохранить";
-  }
+  button.textContent = loading ? "Сохранение..." : "Сохранить";
 }
 
 //  Анимация попапов при загрузке
@@ -84,8 +78,7 @@ editButton.addEventListener("click", () => {
 //открыть попап для новой карточки
 
 cardButton.addEventListener("click", () => {
-  placeInput.value = "";
-  urlInput.value = "";
+  popupCardForm.reset();
 
   clearValidation(popupNewCard, validationConfig);
   openPopup(popupNewCard);
@@ -111,12 +104,7 @@ function handleFormSubmitEdit(evt) {
   loadingSave(true, popupButtonEdit);
 
   editUser(evt.target.name.value, evt.target.description.value)
-    .then(() => {
-      const user = {
-        name: evt.target.name.value,
-        about: evt.target.description.value,
-      };
-
+    .then((user) => {
       profileTitle.textContent = user.name;
       profileDescription.textContent = user.about;
 
@@ -146,7 +134,6 @@ function handleFormSubmitCard(evt) {
         createCard(card, card.owner._id, deleteCard, likeCard, openImage)
       );
       closePopup(popupNewCard);
-      popupCardForm.reset();
     })
     .catch((err) => {
       console.log("Ошибка при добавлении карточки:" + err);
@@ -166,11 +153,8 @@ function handleFormSubmitAvatar(evt) {
   loadingSave(true, popupButtonAvatar);
 
   changeAvatarLink(evt.target.link.value)
-    .then(() => {
-      const photo = {
-        link: evt.target.link.value,
-      };
-      profileImage.src = photo.link;
+    .then((photo) => {
+      profileImage.src = photo.avatar;
       closePopup(popupAvatar);
       popupAvatarForm.reset();
     })
@@ -192,7 +176,7 @@ imageSection.addEventListener("click", () => {
 
 // валидация
 
-export const validationConfig = {
+const validationConfig = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
